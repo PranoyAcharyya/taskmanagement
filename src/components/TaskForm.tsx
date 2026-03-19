@@ -15,8 +15,11 @@ import {
 } from "@/service/hooks/useTask";
 import { TaskFormProps } from "@/typescript/types";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 export function TaskForm({ open, onClose, mode, initialData }: TaskFormProps) {
+
+
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
       title: "",
@@ -24,6 +27,7 @@ export function TaskForm({ open, onClose, mode, initialData }: TaskFormProps) {
       priority: "",
     },
   });
+  
 
   const { mutate: addTask } = useAddTaskMutation();
   const { mutate: updateTask } = useUpdateTaskMutation();
@@ -34,12 +38,16 @@ export function TaskForm({ open, onClose, mode, initialData }: TaskFormProps) {
         { id: initialData.id, data },
         {
           onSuccess: () => onClose(false),
+          
         },
-      );
+      )
+      toast.success('Task has been Updated');
+      ;
     } else {
       addTask(data, {
         onSuccess: () => onClose(false),
       });
+      toast.success('Task has been added');
     }
   };
 

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useDeleteTaskMutation, useTasksQuery, useToggleTaskMutation } from "@/service/hooks/useTask";
 import Image from "next/image";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -22,16 +23,23 @@ export default function Home() {
   };
 
   const handleToggle = (task: any) => {
+    
     setLoadingId(task.id);
 
     toggleTask(task, {
       onSuccess: () => setLoadingId(null),
       onError: () => setLoadingId(null),
     });
+     toast(
+        task.completed
+          ? "Marked as incomplete ❌"
+          : "Marked as completed ✅"
+      );
   };
 
   const handleDelete = (task: any) => {
   deleteTask(task.id);
+  toast.success('Task successfully deleted')
 };
   
 

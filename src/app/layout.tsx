@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Noto_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import TanstackProvider from "@/service/helper/TanstackProvider";
+import { Toaster } from "react-hot-toast";
 
 const notoSans = Noto_Sans({variable:'--font-sans'});
 
@@ -33,6 +34,7 @@ export default function RootLayout({
       >
         <TanstackProvider>
           {children}
+          <Toaster position="top-center" />
         </TanstackProvider>
         
       </body>

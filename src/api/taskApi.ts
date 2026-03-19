@@ -17,8 +17,6 @@ export const addTask = async(data:any)=>{
     return res.data;
 }
 
-
-
 export const updateTask = async (id: string, data: any) => {
   const res = await api.put(`tasks/${id}`, data);
   return res.data;
